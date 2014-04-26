@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<mule-configuration xmlns="http://www.mulesoft.com/tooling/messageflow" name="alainn-wish-list-service">
+    <global-element name="HTTP\HTTPS" type="org.mule.tooling.ui.modules.core.global.httpsConnector" entity-id="HTTP-HTTPS#1">
+        <properties>
+            <property name="reuseAddress"/>
+            <property name="enableCookies"/>
+            <property name="serverSoTimeout" value="10000"/>
+            <property name="failOnUnresolvedHost"/>
+            <property name="socketSoLinger" value="0"/>
+            <property name="clientSoTimeout" value="10000"/>
+            <property name="socketMaxWait"/>
+            <property name="cookieSpec" value="netscape"/>
+            <property name="receiveBufferSize" value="0"/>
+            <property name="proxyHostname"/>
+            <property name="name" value="httpsConnector"/>
+            <property name="keepSendSocketOpen"/>
+            <property name="dynamicNotification"/>
+            <property name="sendBufferSize" value="0"/>
+            <property name="ENABLE_MODE_SWITCH"/>
+            <property name="auxiliary;index" value="1"/>
+            <property name="proxyPassword"/>
+            <property name="proxyUsername"/>
+            <property name="receiveBacklog" value="0"/>
+            <property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/https/connector"/>
+            <property name="validateConnections" value="true"/>
+            <property name="label"/>
+            <property name="sendTcpNoDelay"/>
+            <property name="keepAlive"/>
+            <property name="proxyPort"/>
+            <property name="dispatcherPoolFactory-ref"/>
+            <property name="connectionTimeout"/>
+            <property-collection name="@http://www.mulesoft.org/schema/mule/https/tls-key-store;0">
+                <property name="path" value="keystore.jks"/>
+                <property name="storePassword" value="changeit"/>
+                <property name="keyPassword" value="changeit"/>
+                <property name="auxiliary;index" value="3"/>
+                <property name="auxiliary;wrapIn" value="3"/>
+            </property-collection>
+        </properties>
+    </global-element>
+    <global-unknown description="false" index="4" entity-id="global-unknown#1">
+        <content>&lt;mulexml:namespace-manager xmlns:mulexml=&quot;http://www.mulesoft.org/schema/mule/xml&quot; includeConfigNamespaces=&quot;true&quot;&gt;
+        &lt;mulexml:namespace prefix=&quot;mes&quot; uri=&quot;http://www.alainn.com/SOA/message/1.0&quot;/&gt;
+        &lt;mulexml:namespace prefix=&quot;mod&quot; uri=&quot;http://www.alainn.com/SOA/model/1.0&quot;/&gt;
+    &lt;/mulexml:namespace-manager&gt;</content>
+    </global-unknown>
+    <global-element name="Property Placeholder" type="http://www.springframework.org/schema/context/property-placeholder" entity-id="Property Placeholder#1">
+        <properties>
+            <property name="properties-ref"/>
+            <property name="order"/>
+            <property name="location" value="config.prod.properties"/>
+            <property name="local-override"/>
+            <property name="system-properties-mode"/>
+            <property name="file-encoding"/>
+            <property name="auxiliary;index" value="7"/>
+            <property name="ignore-unresolvable"/>
+            <property name="ignore-resource-not-found"/>
+        </properties>
+    </global-element>
+    <global-element name="MySQL Configuration" type="http://www.mulesoft.org/schema/mule/db/mysql-config" entity-id="MySQL Configuration#1">
+        <properties>
+            <property name="port" value="3306"/>
+            <property name="host" value="mule-demo-repository.cdumb7bgzajt.us-east-1.rds.amazonaws.com"/>
+            <property name="auxiliary;metauseMetaData"/>
+            <property name="driverClassName"/>
+            <property name="loginTimeout"/>
+            <property name="transactionIsolation"/>
+            <property name="password" value="Mule1379"/>
+            <property name="database" value="alainn"/>
+            <property name="url"/>
+            <property name="dataSource-ref"/>
+            <property name="name" value="MySQL_Configuration"/>
+            <property name="databaseParametersConf"/>
+            <property name="springBeanConf"/>
+            <property name="useXaTransactions"/>
+            <property name="databaseURLConf"/>
+            <property name="user" value="mule"/>
+            <property name="auxiliary;index" value="8"/>
+        </properties>
+    </global-element>
+    <flow SubFlow="false" name="WishListserviceFlow1" type="http://www.mulesoft.org/schema/mule/core/flow" entity-id="2081dd00-cead-45c8-97ee-2e48d55a135d">
+        <properties>
+            <property name="initialState"/>
+            <property name="processingStrategy2"/>
+            <property name="processingStrategy"/>
+            <property name="bussinessEventsLabel"/>
+            <property name="tracking:enable-default-events"/>
+            <property name="auxiliary;index" value="9"/>
+        </properties>
+        <lane hadOnlyOneElement="false" index="0" isChoiceOtherwiseLane="false" entity-id="compartment-lane#1">
+            <graphicalData x="0" y="0" width="0" height="0"/>
+            <endpoint direction="Inbound" name=":8081/wish-list-service" type="http://www.mulesoft.org/schema/mule/http/endpoint" entity-id="HTTP#1">
+                <graphicalData x="0" y="0" width="0" height="0"/>
+                <properties>
+                    <property name="port" value="${https.port}"/>
+                    <property name="contentType"/>
+                    <property name="password"/>
+                    <property name="tracking:enable-default-events"/>
+                    <property name="exchange-pattern" value="request-response"/>
+                    <property name="encoding"/>
+                    <property name="path" value="wish-list-service"/>
+                    <property name="responseTransformer-refs"/>
+                    <property name="auxiliary;index" value="10"/>
+                    <property name="connector-ref-outbound" value="httpsConnector"/>
+                    <property name="mimeType"/>
+                    <property name="responseTimeout"/>
+                    <property name="host" value="localhost"/>
+                    <property name="businessEventsLabel"/>
+                    <property name="followRedirects"/>
+                    <property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/https/endpoint"/>
+                    <property name="keep-alive"/>
+                    <property name="disableTransportTransformer"/>
+                    <property name="ref"/>
+                    <property name="httpLabel"/>
+                    <property name="transformer-refs"/>
+                    <property name="address"/>
+                    <property name="method"/>
+                    <property name="user"/>
+                    <property name="connector-ref" value="httpsConnector"/>
+                </properties>
+            </endpoint>
+            <pattern name="Proxy service" type="http://www.mulesoft.org/schema/mule/cxf/soapComponent" entity-id="CXF#1">
+                <graphicalData x="0" y="0" width="0" height="0"/>
+                <properties>
+                    <property name="port" value="WishListPort"/>
+                    <property name="wsdlLocation" value="service/WishListService.wsdl"/>
+                    <property name="serviceClass"/>
+                    <property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/cxf/proxy-service"/>
+                    <property name="payload" value="body"/>
+                    <property name="configuration-ref"/>
+                    <property name="namespace" value="http://www.alainn.com/SOA/service/WishList/1.0"/>
+                    <property name="validationEnabled"/>
+                    <property name="bindingId"/>
+                    <property name="onException"/>
+                    <property name="service" value="WishListService"/>
+                    <property name="mtomEnabled"/>
+                    <property name="soapVersion"/>
+                    <property name="enableMuleSoapHeaders"/>
+                    <property name="auxiliary;index" value="11"/>
+                    <property-collection name="@http://www.mulesoft.org/schema/mule/cxf/schemaLocations;0">
+                        <property name="auxiliary;index" value="12"/>
+                        <property name="auxiliary;wrapIn" value="12"/>
+                        <property-collection name="@http://www.mulesoft.org/schema/mule/cxf/schemaLocation;1">
+                            <property name="schemaLocation" value="service/SOA-Message-1.0.xsd"/>
+                            <property name="auxiliary;index" value="13"/>
+                            <property name="auxiliary;wrapIn" value="13"/>
+                        </property-collection>
+                    </property-collection>
+                </properties>
+            </pattern>
+            <pattern name="opName" type="http://www.mulesoft.org/schema/mule/core/variable-transformer" entity-id="Variable#1">
+                <graphicalData x="0" y="0" width="0" height="0"/>
+                <properties>
+                    <property name="variableName" value="opName"/>
+                    <property name="value" value="#[xpath('fn:local-name(/*)')]"/>
+                    <property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/core/set-variable"/>
+                    <property name="auxiliary;index" value="14"/>
+                </properties>
+            </pattern>
+            <splitter index="15" name="Choice" type="org.mule.tooling.ui.modules.core.pattern.cbr" entity-id="Choice#1">
+                <graphicalData x="0" y="0" width="0" height="0"/>
+                <properties>
+                    <property-collection name="7cc91bf0-7f92-4c39-b030-a6e001ef65e0">
+                        <property name="choice.expression" value="#[opName == 'getWishList']"/>
+                        <property-collection name="choice.attributes">
+                            <property name="expression" value="#[opName == 'getWishList']"/>
+                        </property-collection>
+                    </property-collection>
+                    <property-collection name="99ea2223-fcad-4426-9749-368b832ab03e">
+                        <property name="choice.expression" value="#[opName == 'addWish']"/>
+                        <property-collection name="choice.attributes">
+                            <property name="expression" value="#[opName == 'addWish']"/>
+                        </property-collection>
+                    </property-collection>
+                    <property-collection name="7432e4a5-cc43-4fde-a086-21835412b618">
+                        <property name="choice.expression" value="#[opName == 'removeWish']"/>
+                        <property-collection name="choice.attributes">
+                            <property name="expression" value="#[opName == 'removeWish']"/>
+                        </property-collection>
+                    </property-collection>
+                    <property-collection name="99aaf39a-0cc9-4cb0-bcad-b8d1e3917bb9">
+                        <property name="choice.otherwise" value="true"/>
+                        <property-collection name="choice.attributes"/>
+                    </property-collection>
+                </properties>
+                <pattern name="Choice" type="org.mule.tooling.ui.modules.core.pattern.cbr" entity-id="Choice#2"/>
+                <compartment entity-id="compartment#1">
+                    <lane hadOnlyOneElement="false" index="17" isChoiceOtherwiseLane="false" entity-id="7cc91bf0-7f92-4c39-b030-a6e001ef65e0">
+                        <pattern name="select wish" type="http://www.mulesoft.org/schema/mule/db/database-connector" entity-id="Database#1">
+                            <graphicalData x="0" y="0" width="0" height="0"/>
+                            <properties>
+<property name="streaming"/>
+<property name=""/>
+<property name="source"/>
+<property name="statementFactory-ref"/>
+<property name="transactionalAction"/>
+<property name="target"/>
+<property name="maxRows"/>
+<property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/db/select"/>
+<property name="config-ref" value="MySQL_Configuration"/>
+<property name="auxiliary;index" value="17"/>
+<property-collection name="@http://www.mulesoft.org/schema/mule/db/parameterized-query;0">
+    <property name="text" value="select si.id, si.name, si.summary, si.price, si.stock_quantity, si.image_url from wish w, sku_item si where w.customer_id = #[xpath:/mes:getWishList/mod:CustomerId] and w.sku_item_id = si.id limit #[Integer.valueOf(xpath('/mes:getWishList/mes:PageInfo/pageIndex/text()').text)],#[Integer.valueOf(xpath('/mes:getWishList/mes:PageInfo/pageSize/text()').text)]"/>
+    <property name="auxiliary;index" value="18"/>
+    <property name="auxiliary;wrapIn" value="18"/>
+</property-collection>
+                            </properties>
+                        </pattern>
+                    </lane>
+                    <lane hadOnlyOneElement="false" index="20" isChoiceOtherwiseLane="false" entity-id="99ea2223-fcad-4426-9749-368b832ab03e">
+                        <pattern name="insert wish" type="http://www.mulesoft.org/schema/mule/db/database-connector" entity-id="Database#2">
+                            <graphicalData x="0" y="0" width="0" height="0"/>
+                            <properties>
+<property name=""/>
+<property name="source"/>
+<property name="autoGeneratedKeysColumnNames"/>
+<property name="statementFactory-ref"/>
+<property name="transactionalAction"/>
+<property name="target"/>
+<property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/db/insert"/>
+<property name="autoGeneratedKeysColumnIndexes"/>
+<property name="config-ref" value="MySQL_Configuration"/>
+<property name="auxiliary;index" value="20"/>
+<property name="autoGeneratedKeys"/>
+<property name="bulkMode"/>
+<property-collection name="@http://www.mulesoft.org/schema/mule/db/parameterized-query;0">
+    <property name="text" value=" insert into wish(customer_id, sku_item_id) values(#[xpath:/mes:addWish/mod:CustomerId], #[xpath:/mes:addWish/mod:Sku]) "/>
+    <property name="auxiliary;index" value="21"/>
+    <property name="auxiliary;wrapIn" value="21"/>
+</property-collection>
+                            </properties>
+                        </pattern>
+                    </lane>
+                    <lane hadOnlyOneElement="false" index="23" isChoiceOtherwiseLane="false" entity-id="7432e4a5-cc43-4fde-a086-21835412b618">
+                        <pattern name="update wish set !active" type="http://www.mulesoft.org/schema/mule/db/database-connector" entity-id="Database#3">
+                            <graphicalData x="0" y="0" width="0" height="0"/>
+                            <properties>
+<property name=""/>
+<property name="source"/>
+<property name="statementFactory-ref"/>
+<property name="transactionalAction"/>
+<property name="target"/>
+<property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/db/update"/>
+<property name="config-ref" value="MySQL_Configuration"/>
+<property name="auxiliary;index" value="23"/>
+<property name="bulkMode"/>
+<property-collection name="@http://www.mulesoft.org/schema/mule/db/parameterized-query;0">
+    <property name="text" value=" update wish set active = false where customer_id = #[xpath:/mes:addWish/mod:CustomerId] and sku_item_id = #[xpath:/mes:addWish/mod:Sku]  "/>
+    <property name="auxiliary;index" value="24"/>
+    <property name="auxiliary;wrapIn" value="24"/>
+</property-collection>
+                            </properties>
+                        </pattern>
+                    </lane>
+                    <lane hadOnlyOneElement="false" index="26" isChoiceOtherwiseLane="true" entity-id="99aaf39a-0cc9-4cb0-bcad-b8d1e3917bb9">
+                        <pattern name="Exception" type="http://www.mulesoft.org/schema/mule/scripting/groovyComponent" entity-id="Groovy#1">
+                            <graphicalData x="0" y="0" width="0" height="0"/>
+                            <properties>
+<property name="script-ref"/>
+<property name="auxiliary;index" value="26"/>
+<property-collection name="@http://www.mulesoft.org/schema/mule/scripting/script-for-properties;0">
+    <property name="text" value="throw new RuntimeException(&quot;Unknown Operation: &quot; + flowVars.opName);"/>
+    <property name="engine" value="Groovy"/>
+    <property name="auxiliary;index" value="27"/>
+    <property name="auxiliary;wrapIn" value="27"/>
+</property-collection>
+<property-collection name="@http://www.mulesoft.org/schema/mule/scripting/script;0">
+    <property name="text" value="throw new RuntimeException(&quot;Unknown Operation: &quot; + flowVars.opName);"/>
+    <property name="engine" value="Groovy"/>
+    <property name="auxiliary;index" value="27"/>
+    <property name="auxiliary;wrapIn" value="27"/>
+</property-collection>
+                            </properties>
+                        </pattern>
+                    </lane>
+                </compartment>
+            </splitter>
+        </lane>
+    </flow>
+</mule-configuration>
