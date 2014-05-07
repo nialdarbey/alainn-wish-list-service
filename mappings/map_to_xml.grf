@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?><Graph __version="3.5.0" author="nialdarbey" created="Mon May 05 10:16:16 ART 2014" description="Map To XML" guiVersion="3.4.3.P" id="1399315287633" licenseCode="Unlicensed" licenseType="Unknown" modified="Mon May 05 10:16:16 ART 2014" modifiedBy="nialdarbey" name="Map_To_XML" preview-file="${Project_Home}/src/test/resources/wishlist.groovy" revision="1.0" showComponentDetails="false">
+<Global>
+<Metadata __index="12" __referenceCounter="0" __sourcePath="{http://www.alainn.com/SOA/model/1.0=ns1,http://www.alainn.com/SOA/message/1.0=ns0}/ns0:getWishListResponse/ns1:ItemSku/characteristics/characteristic" _dataStructure="SINGLE_DIMENSIONAL_COLLECTION" _id="__id" _metadataParentId="6b171ce2-9c02-48df-8ccc-841c193cd973" _parent_id="__parent_id" _type="Output" id="e96d5d3d-4f4d-476b-ba89-abda03d4d48c">
+<Record fieldDelimiter="," name="characteristic" recordDelimiter="\n\\|\r\n\\|\r" type="delimited">
+<Field __artificialType="_parent_id" __systemManaged="true" name="__parent_id" type="string"/>
+<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
+<Field __index="12" __sourcePath="{http://www.alainn.com/SOA/model/1.0=ns1,http://www.alainn.com/SOA/message/1.0=ns0}/ns0:getWishListResponse/ns1:ItemSku/characteristics/characteristic/@name" containerType="SINGLE" label="name" name="name" type="string"/>
+<Field __index="13" __sourcePath="{http://www.alainn.com/SOA/model/1.0=ns1,http://www.alainn.com/SOA/message/1.0=ns0}/ns0:getWishListResponse/ns1:ItemSku/characteristics/characteristic/@text()" containerType="SINGLE" label="text()" name="text" type="string"/>
+</Record>
+</Metadata>
+<Metadata __index="0" __referenceCounter="1" __sourcePath="{http://www.alainn.com/SOA/message/1.0=ns0}/ns0:getWishListResponse" _dataStructure="OBJECT" _id="__id" _type="Output" id="d2ff455c-9a67-42f9-86f5-88b215b08bea">
+<Record fieldDelimiter="," name="getWishListResponse" recordDelimiter="\n\\|\r\n\\|\r" type="delimited">
+<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
+<Field __index="0" __sourcePath="{http://www.alainn.com/SOA/message/1.0=ns0}/ns0:getWishListResponse/ns0:PageInfo/pageIndex" containerType="SINGLE" label="pageIndex" name="pageIndex" type="integer"/>
+<Field __index="1" __sourcePath="{http://www.alainn.com/SOA/message/1.0=ns0}/ns0:getWishListResponse/ns0:PageInfo/pageSize" containerType="SINGLE" label="pageSize" name="pageSize" type="integer"/>
+</Record>
+</Metadata>
+<Metadata __index="0" __referenceCounter="1" __sourcePath="{}/getWishListResponse" _dataStructure="OBJECT" _id="__id" _type="Input" id="752b7d13-b383-4a8f-bb9b-33cfd9db8a5d">
+<Record fieldDelimiter="," name="getWishListResponse" recordDelimiter="\n\\|\r\n\\|\r" type="delimited">
+<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
+<Field __index="0" __sourcePath="{}/getWishListResponse/PageInfo/pageIndex" containerType="SINGLE" label="pageIndex" name="pageIndex" type="integer"/>
+<Field __index="1" __sourcePath="{}/getWishListResponse/PageInfo/pageSize" containerType="SINGLE" label="pageSize" name="pageSize" type="integer"/>
+</Record>
+</Metadata>
+<Metadata __index="7" __referenceCounter="1" __sourcePath="{http://www.alainn.com/SOA/model/1.0=ns1,http://www.alainn.com/SOA/message/1.0=ns0}/ns0:getWishListResponse/ns1:ItemSku/images/image" _dataStructure="SINGLE_DIMENSIONAL_COLLECTION" _id="__id" _metadataParentId="6b171ce2-9c02-48df-8ccc-841c193cd973" _parent_id="__parent_id" _type="Output" id="3571c4b0-69ce-4c50-b96f-0858c4802b50">
+<Record fieldDelimiter="," name="image" recordDelimiter="\n\\|\r\n\\|\r" type="delimited">
+<Field __artificialType="_parent_id" __systemManaged="true" name="__parent_id" type="string"/>
+<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
+<Field __index="7" __sourcePath="{http://www.alainn.com/SOA/model/1.0=ns1,http://www.alainn.com/SOA/message/1.0=ns0}/ns0:getWishListResponse/ns1:ItemSku/images/image/@type" containerType="SINGLE" label="type" name="type" type="string"/>
+<Field __index="8" __sourcePath="{http://www.alainn.com/SOA/model/1.0=ns1,http://www.alainn.com/SOA/message/1.0=ns0}/ns0:getWishListResponse/ns1:ItemSku/images/image/@text()" containerType="SINGLE" label="text()" name="text" type="string"/>
+</Record>
+</Metadata>
+<Metadata __index="3" __referenceCounter="0" __sourcePath="{}/getWishListResponse/ItemSku/images/image" _dataStructure="SINGLE_DIMENSIONAL_COLLECTION" _id="__id" _metadataParentId="792f464d-535a-4964-bbac-e2fff49474cb" _parent_id="__parent_id" _type="Input" id="7b52025d-294b-4b20-92c2-133ad33ee749">
+<Record fieldDelimiter="," name="image" recordDelimiter="\n\\|\r\n\\|\r" type="delimited">
+<Field __artificialType="_parent_id" __systemManaged="true" name="__parent_id" type="string"/>
+<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
+<Field __sourcePath="{}/getWishListResponse/ItemSku/images/image/image_x005ftype_x005fname" containerType="SINGLE" label="image_type_name" name="image_type_name" type="string"/>
+<Field __sourcePath="{}/getWishListResponse/ItemSku/images/image/url" containerType="SINGLE" label="url" name="url" type="string"/>
+</Record>
+</Metadata>
+<Metadata __index="3" __referenceCounter="1" __sourcePath="{}/getWishListResponse/ItemSku/images" _dataStructure="SINGLE_DIMENSIONAL_COLLECTION" _id="__id" _metadataParentId="b5cceb8e-6e32-49c8-ac1f-35894fe664b4" _parent_id="__parent_id" _type="Input" id="a95533e0-f8c6-4db6-bae3-49b8f93042ef">
+<Record fieldDelimiter="," name="images" recordDelimiter="\n\\|\r\n\\|\r" type="delimited">
+<Field __artificialType="_parent_id" __systemManaged="true" name="__parent_id" type="string"/>
+<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
+<Field __sourcePath="{}/getWishListResponse/ItemSku/images/image_x005ftype_x005fname" containerType="SINGLE" label="image_type_name" name="image_type_name" type="string"/>
+<Field __sourcePath="{}/getWishListResponse/ItemSku/images/url" containerType="SINGLE" label="url" name="url" type="string"/>
+</Record>
+</Metadata>
+<Metadata __index="2" __referenceCounter="1" __schemaType="{http://www.alainn.com/SOA/model/1.0}skuType" __sourcePath="{http://www.alainn.com/SOA/model/1.0=ns1,http://www.alainn.com/SOA/message/1.0=ns0}/ns0:getWishListResponse/ns1:ItemSku" _dataStructure="SINGLE_DIMENSIONAL_COLLECTION" _id="__id" _metadataParentId="d2ff455c-9a67-42f9-86f5-88b215b08bea" _parent_id="__parent_id" _type="Output" id="6b171ce2-9c02-48df-8ccc-841c193cd973">
+<Record fieldDelimiter="," name="ItemSku" recordDelimiter="\n\\|\r\n\\|\r" type="delimited">
+<Field __artificialType="_parent_id" __systemManaged="true" name="__parent_id" type="string"/>
+<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
+<Field __index="2" __schemaType="{http://www.alainn.com/SOA/model/1.0}skuType" __sourcePath="{http://www.alainn.com/SOA/model/1.0=ns1,http://www.alainn.com/SOA/message/1.0=ns0}/ns0:getWishListResponse/ns1:ItemSku/id" containerType="SINGLE" label="id" name="id" type="string"/>
+<Field __index="3" __schemaType="{http://www.alainn.com/SOA/model/1.0}skuType" __sourcePath="{http://www.alainn.com/SOA/model/1.0=ns1,http://www.alainn.com/SOA/message/1.0=ns0}/ns0:getWishListResponse/ns1:ItemSku/type" containerType="SINGLE" label="type" name="type" type="string"/>
+<Field __index="4" __schemaType="{http://www.alainn.com/SOA/model/1.0}skuType" __sourcePath="{http://www.alainn.com/SOA/model/1.0=ns1,http://www.alainn.com/SOA/message/1.0=ns0}/ns0:getWishListResponse/ns1:ItemSku/name" containerType="SINGLE" label="name" name="name" type="string"/>
+<Field __index="5" __schemaType="{http://www.alainn.com/SOA/model/1.0}skuType" __sourcePath="{http://www.alainn.com/SOA/model/1.0=ns1,http://www.alainn.com/SOA/message/1.0=ns0}/ns0:getWishListResponse/ns1:ItemSku/summary" containerType="SINGLE" label="summary" name="summary" type="string"/>
+<Field __index="6" __schemaType="{http://www.alainn.com/SOA/model/1.0}skuType" __sourcePath="{http://www.alainn.com/SOA/model/1.0=ns1,http://www.alainn.com/SOA/message/1.0=ns0}/ns0:getWishListResponse/ns1:ItemSku/brand" containerType="SINGLE" label="brand" name="brand" type="string"/>
+<Field __index="9" __schemaType="{http://www.alainn.com/SOA/model/1.0}skuType" __sourcePath="{http://www.alainn.com/SOA/model/1.0=ns1,http://www.alainn.com/SOA/message/1.0=ns0}/ns0:getWishListResponse/ns1:ItemSku/sku" containerType="SINGLE" label="sku" name="sku" type="string"/>
+<Field __index="10" __schemaType="{http://www.alainn.com/SOA/model/1.0}skuType" __sourcePath="{http://www.alainn.com/SOA/model/1.0=ns1,http://www.alainn.com/SOA/message/1.0=ns0}/ns0:getWishListResponse/ns1:ItemSku/price" containerType="SINGLE" label="price" name="price" type="number"/>
+<Field __index="11" __schemaType="{http://www.alainn.com/SOA/model/1.0}skuType" __sourcePath="{http://www.alainn.com/SOA/model/1.0=ns1,http://www.alainn.com/SOA/message/1.0=ns0}/ns0:getWishListResponse/ns1:ItemSku/quantityInStock" containerType="SINGLE" label="quantityInStock" name="quantityInStock" type="integer"/>
+</Record>
+</Metadata>
+<Metadata __index="2" __referenceCounter="1" __sourcePath="{}/getWishListResponse/ItemSku" _dataStructure="SINGLE_DIMENSIONAL_COLLECTION" _id="__id" _metadataParentId="752b7d13-b383-4a8f-bb9b-33cfd9db8a5d" _parent_id="__parent_id" _type="Input" id="b5cceb8e-6e32-49c8-ac1f-35894fe664b4">
+<Record fieldDelimiter="," name="ItemSku" recordDelimiter="\n\\|\r\n\\|\r" type="delimited">
+<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
+<Field __artificialType="_parent_id" __systemManaged="true" name="__parent_id" type="string"/>
+<Field __index="6" __sourcePath="{}/getWishListResponse/ItemSku/item_brand_name" containerType="SINGLE" label="item_brand_name" name="brand" type="string"/>
+<Field __index="2" __sourcePath="{}/getWishListResponse/ItemSku/sku_id" containerType="SINGLE" label="sku_id" name="id" type="string"/>
+<Field __index="4" __sourcePath="{}/getWishListResponse/ItemSku/name" containerType="SINGLE" label="name" name="name" type="string"/>
+<Field __index="8" __sourcePath="{}/getWishListResponse/ItemSku/price" containerType="SINGLE" label="price" name="price" type="integer"/>
+<Field __index="9" __sourcePath="{}/getWishListResponse/ItemSku/stock_quantity" containerType="SINGLE" label="stock_quantity" name="quantityInStock" type="integer"/>
+<Field __index="7" __sourcePath="{}/getWishListResponse/ItemSku/sku" containerType="SINGLE" label="sku" name="sku" type="string"/>
+<Field __index="5" __sourcePath="{}/getWishListResponse/ItemSku/summary" containerType="SINGLE" label="summary" name="summary" type="string"/>
+<Field __index="3" __sourcePath="{}/getWishListResponse/ItemSku/type" containerType="SINGLE" label="type" name="type" type="string"/>
+</Record>
+</Metadata>
+<Dictionary>
+<Entry id="DictionaryEntry0" input="true" name="inputPayload" output="false" type="object"/>
+<Entry id="DictionaryEntry1" input="false" name="outputPayload" output="true" type="object"/>
+</Dictionary>
+</Global>
+<Phase number="0">
+<Node enabled="enabled" fileURL="dict:inputPayload" guiName="Map&lt;k,v&gt; READER" guiX="20" guiY="20" id="BEAN_READER0" type="BEAN_READER">
+<attr name="mapping"><![CDATA[<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Context outPort="0" sequenceField="__id" xpath=".">
+  <Mapping cloverField="pageIndex" trim="true" xpath="PageInfo/pageIndex"/>
+  <Mapping cloverField="pageSize" trim="true" xpath="PageInfo/pageSize"/>
+  <Context generatedKey="__parent_id" outPort="1" parentKey="__id" sequenceField="__id" xpath="ItemSku">
+    <Mapping cloverField="brand" trim="true" xpath="item_brand_name"/>
+    <Mapping cloverField="id" trim="true" xpath="sku_id"/>
+    <Mapping cloverField="name" trim="true" xpath="name"/>
+    <Mapping cloverField="price" trim="true" xpath="price"/>
+    <Mapping cloverField="quantityInStock" trim="true" xpath="stock_quantity"/>
+    <Mapping cloverField="sku" trim="true" xpath="sku"/>
+    <Mapping cloverField="summary" trim="true" xpath="summary"/>
+    <Mapping cloverField="type" trim="true" xpath="type"/>
+    <Context generatedKey="__parent_id" outPort="2" parentKey="__id" sequenceField="__id" xpath="images">
+      <Mapping cloverField="image_type_name" trim="true" xpath="image_x005ftype_x005fname"/>
+      <Mapping cloverField="url" trim="true" xpath="url"/>
+    </Context>
+  </Context>
+</Context>
+]]></attr>
+<attr name="_data_format"><![CDATA[MAP]]></attr>
+</Node>
+<Node cacheInMemory="true" charset="UTF-8" enabled="enabled" fileURL="dict:outputPayload" guiName="XML WRITER" guiX="900" guiY="20" id="EXT_XML_WRITER0" type="EXT_XML_WRITER" xmlSchemaURL="./src/main/resources/service/SOA-Message-1.0.xsd">
+<attr name="mapping"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<clover:element clover:name="ns0:getWishListResponse" xmlns:clover="http://www.cloveretl.com/ns/xmlmapping" xmlns:ns0="http://www.alainn.com/SOA/message/1.0" clover:inPort="0">
+  <clover:element clover:name="ns0:PageInfo">
+    <pageIndex>$0.pageIndex</pageIndex>
+    <pageSize>$0.pageSize</pageSize>
+  </clover:element>
+  <clover:element clover:name="ns1:ItemSku" xmlns:ns1="http://www.alainn.com/SOA/model/1.0" clover:inPort="1" clover:key="__parent_id" clover:parentKey="__id">
+    <id>$1.id</id>
+    <type>$1.type</type>
+    <name>$1.name</name>
+    <summary>$1.summary</summary>
+    <brand>$1.brand</brand>
+    <images>
+      <image type="$2.type" clover:inPort="2" clover:key="__parent_id" clover:parentKey="__id">$2.text</image>
+    </images>
+    <sku>$1.sku</sku>
+    <price>$1.price</price>
+    <quantityInStock>$1.quantityInStock</quantityInStock>
+  </clover:element>
+</clover:element>]]></attr>
+<attr name="_data_format"><![CDATA[XML]]></attr>
+<attr name="__rootGlobalElementName"><![CDATA[{http://www.alainn.com/SOA/message/1.0}getWishListResponse]]></attr>
+</Node>
+<Node enabled="enabled" guiName="Foreach 'getWishListResponse' -&gt; 'ns0:getWishListResponse'" guiX="460" guiY="20" id="FOREACH_GET_WISH_LIST_RESPONSE_NS0_GET_WISH_LIST_RESPONSE" transformClass="com.mulesoft.datamapper.transform.MelRecordTransform" type="REFORMAT">
+<attr name="melScript"><![CDATA[//MEL
+//START -> DO NOT REMOVE
+output.__id = input.__id;
+//END -> DO NOT REMOVE
+output.pageIndex = input.pageIndex;
+output.pageSize = input.pageSize;
+]]></attr>
+</Node>
+<Node enabled="enabled" guiName="Foreach 'images' -&gt; 'image'" guiX="460" guiY="220" id="FOREACH_IMAGES_IMAGE" transformClass="com.mulesoft.datamapper.transform.MelRecordTransform" type="REFORMAT">
+<attr name="melScript"><![CDATA[//MEL
+//START -> DO NOT REMOVE
+output.__id = input.__id;
+output.__parent_id = input.__parent_id;
+//END -> DO NOT REMOVE
+output.type = input.image_type_name;
+output.text = input.url;]]></attr>
+</Node>
+<Node enabled="enabled" guiName="Foreach 'ItemSku' -&gt; 'ns1:ItemSku'" guiX="460" guiY="120" id="FOREACH_ITEM_SKU_NS1_ITEM_SKU" transformClass="com.mulesoft.datamapper.transform.MelRecordTransform" type="REFORMAT">
+<attr name="melScript"><![CDATA[//MEL
+//START -> DO NOT REMOVE
+output.__id = input.__id;
+output.__parent_id = input.__parent_id;
+//END -> DO NOT REMOVE
+output.brand = input.brand;
+output.id = input.id;
+output.name = input.name;
+output.price = input.price / 100;
+output.quantityInStock = input.quantityInStock;
+output.sku = input.sku;
+output.summary = input.summary;
+output.type = input.type;
+]]></attr>
+</Node>
+<Edge debugMode="true" fromNode="BEAN_READER0:0" guiBendpoints="" id="Edge0" inPort="Port 0 (in)" metadata="752b7d13-b383-4a8f-bb9b-33cfd9db8a5d" outPort="Port 0 (out)" toNode="FOREACH_GET_WISH_LIST_RESPONSE_NS0_GET_WISH_LIST_RESPONSE:0"/>
+<Edge debugMode="true" fromNode="BEAN_READER0:1" guiBendpoints="" id="Edge2" inPort="Port 0 (in)" metadata="b5cceb8e-6e32-49c8-ac1f-35894fe664b4" outPort="Port 1 (out)" toNode="FOREACH_ITEM_SKU_NS1_ITEM_SKU:0"/>
+<Edge debugMode="true" fromNode="BEAN_READER0:2" guiBendpoints="" id="Edge4" inPort="Port 0 (in)" metadata="a95533e0-f8c6-4db6-bae3-49b8f93042ef" outPort="Port 2 (out)" toNode="FOREACH_IMAGES_IMAGE:0"/>
+<Edge debugMode="true" fromNode="FOREACH_GET_WISH_LIST_RESPONSE_NS0_GET_WISH_LIST_RESPONSE:0" guiBendpoints="" id="Edge1" inPort="Port 0 (in)" metadata="d2ff455c-9a67-42f9-86f5-88b215b08bea" outPort="Port 0 (out)" toNode="EXT_XML_WRITER0:0"/>
+<Edge debugMode="true" fromNode="FOREACH_IMAGES_IMAGE:0" guiBendpoints="" id="Edge5" inPort="Port 2 (in)" metadata="3571c4b0-69ce-4c50-b96f-0858c4802b50" outPort="Port 0 (out)" toNode="EXT_XML_WRITER0:2"/>
+<Edge debugMode="true" fromNode="FOREACH_ITEM_SKU_NS1_ITEM_SKU:0" guiBendpoints="" id="Edge3" inPort="Port 1 (in)" metadata="6b171ce2-9c02-48df-8ccc-841c193cd973" outPort="Port 0 (out)" toNode="EXT_XML_WRITER0:1"/>
+</Phase>
+</Graph>

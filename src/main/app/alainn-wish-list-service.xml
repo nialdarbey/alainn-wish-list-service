@@ -29,6 +29,7 @@ http://www.mulesoft.org/schema/mule/db http://www.mulesoft.org/schema/mule/db/cu
     <context:property-placeholder location="config.prod.properties" />
     
     <db:mysql-config name="MySQL_Configuration" host="mule-demo-repository.cdumb7bgzajt.us-east-1.rds.amazonaws.com" port="3306" user="mule" password="Mule1379" database="alainn" doc:name="MySQL Configuration"/>
+    <data-mapper:config name="Map_To_XML" transformationGraphPath="map_to_xml.grf" doc:name="Map_To_XML"/>
     
     <flow name="WishListserviceFlow1" doc:name="WishListserviceFlow1">
         <https:inbound-endpoint exchange-pattern="request-response" host="localhost" port="${https.port}" path="wish-list-service" doc:name=":8081/wish-list-service" connector-ref="httpsConnector"/>
@@ -40,21 +41,56 @@ http://www.mulesoft.org/schema/mule/db http://www.mulesoft.org/schema/mule/db/cu
         <set-variable variableName="opName" value="#[xpath('fn:local-name(/*)')]" doc:name="opName"/>
         <choice doc:name="Choice">
             <when expression="#[opName == 'getWishList']">
-                <db:select config-ref="MySQL_Configuration" doc:name="select wish">
-                    <db:parameterized-query><![CDATA[select si.id, si.name, si.summary, si.price, si.stock_quantity, si.image_url from wish w, sku_item si where w.customer_id = #[xpath:/mes:getWishList/mod:CustomerId] and w.sku_item_id = si.id limit #[Integer.valueOf(xpath('/mes:getWishList/mes:PageInfo/pageIndex/text()').text)],#[Integer.valueOf(xpath('/mes:getWishList/mes:PageInfo/pageSize/text()').text)]]]></db:parameterized-query>
+                <db:select config-ref="MySQL_Configuration" doc:name="select wish" target="flowVars.wishList">
+                    <db:dynamic-query><![CDATA[select si.sku_id, it.item_type_name, si.sku_name, si.sku_summary, i.item_brand, si.price, si.stock_quantity, im.url, imt.image_type_name 
+						from customer c, wish w, item i, item_type it, sku_item si, image im, image_type imt 
+						where c.id = w.customer_id 
+						and w.active = true
+						and w.sku_item_id = si.sku_id 
+						and i.item_type_id = it.id
+						and si.item_id = i.item_id
+						and si.sku_id = im.item_sku_id
+						and im.image_type_id = imt.id
+						and c.id = #[xpath:/mes:getWishList/mod:CustomerId] 
+						and si.item_id = i.item_id
+						and imt.image_type_name in ('#[xpath('/mes:getWishList/mes:ImageType/text()').text.replaceAll(",", "','")]')
+						limit #[Integer.valueOf(xpath('/mes:getWishList/mes:PageInfo/pageIndex/text()').text)],
+						#[Integer.valueOf(xpath('/mes:getWishList/mes:PageInfo/pageSize/text()').text)]]]></db:dynamic-query>
                 </db:select>
+                <expression-transformer doc:name="to []" expression="
+                	np = [ 'PageInfo' : [ 'pageIndex' : Integer.valueOf(xpath('/mes:getWishList/mes:PageInfo/pageIndex/text()').text), 'pageSize' : flowVars.wishList.size() ], 'ItemSku' : [] ];
+                	index = ['x' : 'x'];
+                	for (record :  flowVars.wishList) {
+                		if (index.containsKey(record.sku_id)) {
+                			index.get(record.sku_id).images.add([ 'url' : record.url, 'image_type_name' : record.image_type_name ]);
+                		}
+                		else {
+                			item = [ 'id' : record.sku_id, 'sku': record.sku_id, 'name': record.sku_name, 'summary' : record.sku_summary, 'price' : record.price, 'stock_quantity' : record.stock_quantity,
+                				'brand' : record.item_brand, 'type' : record.item_type_name, 'images' : [] ];
+                			item.images.add(['url' : record.url, 'image_type_name' : record.image_type_name]);
+                			index.put(record.sku_id, item);
+                		}
+                	};
+                	index.remove('x');
+                	np.ItemSku.addAll(index.values());
+                	np
+                ">
+                </expression-transformer>
+                <data-mapper:transform doc:name="Map To XML" config-ref="Map_To_XML"/>
                 
             </when>
             <when expression="#[opName == 'addWish']">
                 <db:insert config-ref="MySQL_Configuration" doc:name="insert wish">
-                    <db:parameterized-query><![CDATA[ insert into wish(customer_id, sku_item_id) values(#[xpath:/mes:addWish/mod:CustomerId], #[xpath:/mes:addWish/mod:Sku]) ]]></db:parameterized-query>
+                    <db:parameterized-query><![CDATA[insert into wish(customer_id, sku_item_id) values(#[xpath:/mes:addWish/mod:CustomerId], #[xpath:/mes:addWish/mod:Sku])]]></db:parameterized-query>
                 </db:insert>
+                <parse-template location="addWishResponse.xml" doc:name="addWishResponse.xml"/>
                 
             </when>
             <when expression="#[opName == 'removeWish']">
                 <db:update config-ref="MySQL_Configuration" doc:name="update wish set !active">
-                    <db:parameterized-query><![CDATA[ update wish set active = false where customer_id = #[xpath:/mes:addWish/mod:CustomerId] and sku_item_id = #[xpath:/mes:addWish/mod:Sku]  ]]></db:parameterized-query>
+                    <db:parameterized-query><![CDATA[ update wish set active = false where customer_id = #[xpath:/mes:removeWish/mod:CustomerId] and sku_item_id = #[xpath:/mes:removeWish/mod:Sku]  ]]></db:parameterized-query>
                 </db:update>
+                <parse-template location="removeWishResponse.xml" doc:name="removeWishResponse.xml"/>
                 
             </when>
             <otherwise>
