@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<mule xmlns:db="http://www.mulesoft.org/schema/mule/db" xmlns:mulexml="http://www.mulesoft.org/schema/mule/xml"
+<mule xmlns:secure-property-placeholder="http://www.mulesoft.org/schema/mule/secure-property-placeholder" xmlns:db="http://www.mulesoft.org/schema/mule/db" xmlns:mulexml="http://www.mulesoft.org/schema/mule/xml"
 	xmlns:context="http://www.springframework.org/schema/context" xmlns:ws="http://www.mulesoft.org/schema/mule/ws" xmlns:data-mapper="http://www.mulesoft.org/schema/mule/ee/data-mapper" xmlns:https="http://www.mulesoft.org/schema/mule/https"
 	xmlns:scripting="http://www.mulesoft.org/schema/mule/scripting" xmlns:tracking="http://www.mulesoft.org/schema/mule/ee/tracking" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:cxf="http://www.mulesoft.org/schema/mule/cxf" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
 	xmlns:spring="http://www.springframework.org/schema/beans" version="EE-3.5.0"
@@ -16,7 +16,8 @@ http://www.mulesoft.org/schema/mule/scripting http://www.mulesoft.org/schema/mul
 http://www.mulesoft.org/schema/mule/ws http://www.mulesoft.org/schema/mule/ws/current/mule-ws.xsd
 http://www.mulesoft.org/schema/mule/ee/data-mapper http://www.mulesoft.org/schema/mule/ee/data-mapper/current/mule-data-mapper.xsd
 http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-current.xsd
-http://www.mulesoft.org/schema/mule/db http://www.mulesoft.org/schema/mule/db/current/mule-db.xsd">
+http://www.mulesoft.org/schema/mule/db http://www.mulesoft.org/schema/mule/db/current/mule-db.xsd
+http://www.mulesoft.org/schema/mule/secure-property-placeholder http://www.mulesoft.org/schema/mule/secure-property-placeholder/current/mule-secure-property-placeholder.xsd">
     
     <https:connector name="httpsConnector" cookieSpec="netscape" validateConnections="true" sendBufferSize="0" receiveBufferSize="0" receiveBacklog="0" clientSoTimeout="10000" serverSoTimeout="10000" socketSoLinger="0" doc:name="HTTP\HTTPS">
         <service-overrides messageFactory="org.mule.transport.http.HttpMultipartMuleMessageFactory" />
@@ -30,6 +31,7 @@ http://www.mulesoft.org/schema/mule/db http://www.mulesoft.org/schema/mule/db/cu
     
     <db:mysql-config name="MySQL_Configuration" host="mule-demo-repository.cdumb7bgzajt.us-east-1.rds.amazonaws.com" port="3306" user="mule" password="Mule1379" database="alainn" doc:name="MySQL Configuration"/>
     <data-mapper:config name="Map_To_XML" transformationGraphPath="map_to_xml.grf" doc:name="Map_To_XML"/>
+    <secure-property-placeholder:config name="Secure_Property_Placeholder" key="${config.key}" location="config.${env}.properties" doc:name="Secure Property Placeholder"/>
     
     <flow name="WishListserviceFlow1" doc:name="WishListserviceFlow1">
         <https:inbound-endpoint exchange-pattern="request-response" host="localhost" port="${https.port}" path="wish-list-service" doc:name=":8081/wish-list-service" connector-ref="httpsConnector"/>
@@ -41,6 +43,8 @@ http://www.mulesoft.org/schema/mule/db http://www.mulesoft.org/schema/mule/db/cu
         <set-variable variableName="opName" value="#[xpath('fn:local-name(/*)')]" doc:name="opName"/>
         <choice doc:name="Choice">
             <when expression="#[opName == 'getWishList']">
+                <set-variable variableName="imageMultiple" value="#[xpath('/mes:getWishList/mes:ImageType/text()').text.split(',').length]" doc:name="imageMultiple"/>
+            	<set-variable variableName="limit" value="#[Integer.valueOf(xpath('/mes:getWishList/mes:PageInfo/pageSize/text()').text) * imageMultiple]" doc:name="pageSize" />
                 <db:select config-ref="MySQL_Configuration" doc:name="select wish" target="flowVars.wishList">
                     <db:dynamic-query><![CDATA[select si.sku_id, it.item_type_name, si.sku_name, si.sku_summary, i.item_brand, si.price, si.stock_quantity, im.url, imt.image_type_name 
 						from customer c, wish w, item i, item_type it, sku_item si, image im, image_type imt 
@@ -54,11 +58,10 @@ http://www.mulesoft.org/schema/mule/db http://www.mulesoft.org/schema/mule/db/cu
 						and c.id = #[xpath:/mes:getWishList/mod:CustomerId] 
 						and si.item_id = i.item_id
 						and imt.image_type_name in ('#[xpath('/mes:getWishList/mes:ImageType/text()').text.replaceAll(",", "','")]')
-						limit #[Integer.valueOf(xpath('/mes:getWishList/mes:PageInfo/pageIndex/text()').text)],
-						#[Integer.valueOf(xpath('/mes:getWishList/mes:PageInfo/pageSize/text()').text)]]]></db:dynamic-query>
+						limit #[Integer.valueOf(xpath('/mes:getWishList/mes:PageInfo/pageIndex/text()').text)],#[limit] ]]></db:dynamic-query>
                 </db:select>
                 <expression-transformer doc:name="to []" expression="
-                	np = [ 'PageInfo' : [ 'pageIndex' : Integer.valueOf(xpath('/mes:getWishList/mes:PageInfo/pageIndex/text()').text), 'pageSize' : flowVars.wishList.size() ], 'ItemSku' : [] ];
+                	np = [ 'PageInfo' : [ 'pageIndex' : Integer.valueOf(xpath('/mes:getWishList/mes:PageInfo/pageIndex/text()').text), 'pageSize' : (wishList.size() / imageMultiple) ], 'ItemSku' : [] ];
                 	index = ['x' : 'x'];
                 	for (record :  flowVars.wishList) {
                 		if (index.containsKey(record.sku_id)) {
@@ -81,7 +84,9 @@ http://www.mulesoft.org/schema/mule/db http://www.mulesoft.org/schema/mule/db/cu
             </when>
             <when expression="#[opName == 'addWish']">
                 <db:insert config-ref="MySQL_Configuration" doc:name="insert wish">
-                    <db:parameterized-query><![CDATA[insert into wish(customer_id, sku_item_id) values(#[xpath:/mes:addWish/mod:CustomerId], #[xpath:/mes:addWish/mod:Sku])]]></db:parameterized-query>
+                    <db:parameterized-query><![CDATA[
+                    	insert into wish(customer_id, sku_item_id) values(#[xpath:/mes:addWish/mod:CustomerId], #[xpath:/mes:addWish/mod:Sku])
+                    	on duplicate key update active = 1]]></db:parameterized-query>
                 </db:insert>
                 <parse-template location="addWishResponse.xml" doc:name="addWishResponse.xml"/>
                 
