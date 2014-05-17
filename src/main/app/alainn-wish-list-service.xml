@@ -55,7 +55,7 @@ http://www.mulesoft.org/schema/mule/secure-property-placeholder http://www.mules
 						and si.item_id = i.item_id
 						and si.sku_id = im.item_sku_id
 						and im.image_type_id = imt.id
-						and c.id = #[xpath:/mes:getWishList/mod:CustomerId] 
+						and c.id = '#[xpath:/mes:getWishList/mod:CustomerId]' 
 						and si.item_id = i.item_id
 						and imt.image_type_name in ('#[xpath('/mes:getWishList/mes:ImageType/text()').text.replaceAll(",", "','")]')
 						limit #[Integer.valueOf(xpath('/mes:getWishList/mes:PageInfo/pageIndex/text()').text)],#[limit] ]]></db:dynamic-query>

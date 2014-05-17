@@ -100,7 +100,7 @@
             <property name="key" value="${config.key}"/>
         </properties>
     </global-element>
-    <flow SubFlow="false" name="WishListserviceFlow1" type="http://www.mulesoft.org/schema/mule/core/flow" entity-id="f04c2789-1b4e-4614-84e0-25e5b1f7c851">
+    <flow SubFlow="false" name="WishListserviceFlow1" type="http://www.mulesoft.org/schema/mule/core/flow" entity-id="32d9e3f5-3fb4-4bea-8322-06af6f83d383">
         <properties>
             <property name="initialState"/>
             <property name="processingStrategy2"/>
@@ -182,32 +182,32 @@
             <splitter index="17" name="Choice" type="org.mule.tooling.ui.modules.core.pattern.cbr" entity-id="Choice#1">
                 <graphicalData x="0" y="0" width="0" height="0"/>
                 <properties>
-                    <property-collection name="b98fd110-9364-4535-a888-069306449815">
+                    <property-collection name="d257de4c-45e4-47d1-9e3f-cebd2acd7210">
                         <property name="choice.expression" value="#[opName == 'getWishList']"/>
                         <property-collection name="choice.attributes">
                             <property name="expression" value="#[opName == 'getWishList']"/>
                         </property-collection>
                     </property-collection>
-                    <property-collection name="2559c381-2a41-44f4-a7dd-d66434668e71">
+                    <property-collection name="c2482f0d-c2d3-48d1-994b-ae8b9385aa30">
                         <property name="choice.expression" value="#[opName == 'addWish']"/>
                         <property-collection name="choice.attributes">
                             <property name="expression" value="#[opName == 'addWish']"/>
                         </property-collection>
                     </property-collection>
-                    <property-collection name="d4d47ab5-7558-47e1-8c04-6597ea799deb">
+                    <property-collection name="4416dc3b-dc79-4e9b-9655-ae361d57cb67">
                         <property name="choice.expression" value="#[opName == 'removeWish']"/>
                         <property-collection name="choice.attributes">
                             <property name="expression" value="#[opName == 'removeWish']"/>
                         </property-collection>
                     </property-collection>
-                    <property-collection name="5a0ae3a6-e295-437b-97fe-abec9f9f95f1">
+                    <property-collection name="2669e1a5-1768-4cc7-b7c1-3acc55fab2ca">
                         <property name="choice.otherwise" value="true"/>
                         <property-collection name="choice.attributes"/>
                     </property-collection>
                 </properties>
                 <pattern name="Choice" type="org.mule.tooling.ui.modules.core.pattern.cbr" entity-id="Choice#2"/>
                 <compartment entity-id="compartment#1">
-                    <lane hadOnlyOneElement="false" index="19" isChoiceOtherwiseLane="false" entity-id="b98fd110-9364-4535-a888-069306449815">
+                    <lane hadOnlyOneElement="false" index="19" isChoiceOtherwiseLane="false" entity-id="d257de4c-45e4-47d1-9e3f-cebd2acd7210">
                         <pattern name="imageMultiple" type="http://www.mulesoft.org/schema/mule/core/variable-transformer" entity-id="Variable#2">
                             <graphicalData x="0" y="0" width="0" height="0"/>
                             <properties>
@@ -240,7 +240,7 @@
 <property name="config-ref" value="MySQL_Configuration"/>
 <property name="auxiliary;index" value="21"/>
 <property-collection name="@http://www.mulesoft.org/schema/mule/db/dynamic-query;0">
-    <property name="text" value="select si.sku_id, it.item_type_name, si.sku_name, si.sku_summary, i.item_brand, si.price, si.stock_quantity, im.url, imt.image_type_name &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;from customer c, wish w, item i, item_type it, sku_item si, image im, image_type imt &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;where c.id = w.customer_id &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;and w.active = true&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;and w.sku_item_id = si.sku_id &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;and i.item_type_id = it.id&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;and si.item_id = i.item_id&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;and si.sku_id = im.item_sku_id&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;and im.image_type_id = imt.id&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;and c.id = #[xpath:/mes:getWishList/mod:CustomerId] &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;and si.item_id = i.item_id&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;and imt.image_type_name in ('#[xpath('/mes:getWishList/mes:ImageType/text()').text.replaceAll(&quot;,&quot;, &quot;','&quot;)]')&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;limit #[Integer.valueOf(xpath('/mes:getWishList/mes:PageInfo/pageIndex/text()').text)],#[limit] "/>
+    <property name="text" value="select si.sku_id, it.item_type_name, si.sku_name, si.sku_summary, i.item_brand, si.price, si.stock_quantity, im.url, imt.image_type_name &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;from customer c, wish w, item i, item_type it, sku_item si, image im, image_type imt &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;where c.id = w.customer_id &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;and w.active = true&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;and w.sku_item_id = si.sku_id &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;and i.item_type_id = it.id&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;and si.item_id = i.item_id&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;and si.sku_id = im.item_sku_id&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;and im.image_type_id = imt.id&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;and c.id = '#[xpath:/mes:getWishList/mod:CustomerId]' &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;and si.item_id = i.item_id&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;and imt.image_type_name in ('#[xpath('/mes:getWishList/mes:ImageType/text()').text.replaceAll(&quot;,&quot;, &quot;','&quot;)]')&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;limit #[Integer.valueOf(xpath('/mes:getWishList/mes:PageInfo/pageIndex/text()').text)],#[limit] "/>
     <property name="auxiliary;index" value="22"/>
     <property name="auxiliary;wrapIn" value="22"/>
 </property-collection>
@@ -275,7 +275,7 @@
                             </properties>
                         </pattern>
                     </lane>
-                    <lane hadOnlyOneElement="false" index="26" isChoiceOtherwiseLane="false" entity-id="2559c381-2a41-44f4-a7dd-d66434668e71">
+                    <lane hadOnlyOneElement="false" index="26" isChoiceOtherwiseLane="false" entity-id="c2482f0d-c2d3-48d1-994b-ae8b9385aa30">
                         <pattern name="insert wish" type="http://www.mulesoft.org/schema/mule/db/database-connector" entity-id="Database#2">
                             <graphicalData x="0" y="0" width="0" height="0"/>
                             <properties>
@@ -305,7 +305,7 @@
                             </properties>
                         </pattern>
                     </lane>
-                    <lane hadOnlyOneElement="false" index="30" isChoiceOtherwiseLane="false" entity-id="d4d47ab5-7558-47e1-8c04-6597ea799deb">
+                    <lane hadOnlyOneElement="false" index="30" isChoiceOtherwiseLane="false" entity-id="4416dc3b-dc79-4e9b-9655-ae361d57cb67">
                         <pattern name="update wish set !active" type="http://www.mulesoft.org/schema/mule/db/database-connector" entity-id="Database#3">
                             <graphicalData x="0" y="0" width="0" height="0"/>
                             <properties>
@@ -332,7 +332,7 @@
                             </properties>
                         </pattern>
                     </lane>
-                    <lane hadOnlyOneElement="false" index="34" isChoiceOtherwiseLane="true" entity-id="5a0ae3a6-e295-437b-97fe-abec9f9f95f1">
+                    <lane hadOnlyOneElement="false" index="34" isChoiceOtherwiseLane="true" entity-id="2669e1a5-1768-4cc7-b7c1-3acc55fab2ca">
                         <pattern name="Exception" type="http://www.mulesoft.org/schema/mule/scripting/groovyComponent" entity-id="Groovy#1">
                             <graphicalData x="0" y="0" width="0" height="0"/>
                             <properties>
