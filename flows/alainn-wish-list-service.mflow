@@ -32,6 +32,7 @@
                 <property name="path" value="keystore.jks"/>
                 <property name="storePassword" value="changeit"/>
                 <property name="keyPassword" value="changeit"/>
+                <property name="isProcessed$$$$ " value="true"/>
                 <property name="auxiliary;index" value="3"/>
                 <property name="auxiliary;wrapIn" value="3"/>
             </property-collection>
@@ -100,7 +101,7 @@
             <property name="key" value="${config.key}"/>
         </properties>
     </global-element>
-    <flow SubFlow="false" name="WishListserviceFlow1" type="http://www.mulesoft.org/schema/mule/core/flow" entity-id="32d9e3f5-3fb4-4bea-8322-06af6f83d383">
+    <flow SubFlow="false" name="WishListserviceFlow1" type="http://www.mulesoft.org/schema/mule/core/flow" entity-id="fee61bfa-e6e3-446d-98c4-aedd1d28c7af">
         <properties>
             <property name="initialState"/>
             <property name="processingStrategy2"/>
@@ -182,32 +183,61 @@
             <splitter index="17" name="Choice" type="org.mule.tooling.ui.modules.core.pattern.cbr" entity-id="Choice#1">
                 <graphicalData x="0" y="0" width="0" height="0"/>
                 <properties>
-                    <property-collection name="d257de4c-45e4-47d1-9e3f-cebd2acd7210">
+                    <property name=";INDEX" value="17"/>
+                    <property-collection name="3e9b4d6d-2f6e-4b14-8c50-ffc13c826e85">
                         <property name="choice.expression" value="#[opName == 'getWishList']"/>
                         <property-collection name="choice.attributes">
                             <property name="expression" value="#[opName == 'getWishList']"/>
                         </property-collection>
                     </property-collection>
-                    <property-collection name="c2482f0d-c2d3-48d1-994b-ae8b9385aa30">
+                    <property-collection name="1c57b5ac-1976-4988-8a20-7bc3d5fefbb9">
                         <property name="choice.expression" value="#[opName == 'addWish']"/>
                         <property-collection name="choice.attributes">
                             <property name="expression" value="#[opName == 'addWish']"/>
                         </property-collection>
                     </property-collection>
-                    <property-collection name="4416dc3b-dc79-4e9b-9655-ae361d57cb67">
+                    <property-collection name="999c34cc-aead-44cb-897d-52b7f2d2e013">
                         <property name="choice.expression" value="#[opName == 'removeWish']"/>
                         <property-collection name="choice.attributes">
                             <property name="expression" value="#[opName == 'removeWish']"/>
                         </property-collection>
                     </property-collection>
-                    <property-collection name="2669e1a5-1768-4cc7-b7c1-3acc55fab2ca">
+                    <property-collection name="93850c74-54db-445c-8739-693a5c5718f5">
                         <property name="choice.otherwise" value="true"/>
                         <property-collection name="choice.attributes"/>
                     </property-collection>
                 </properties>
-                <pattern name="Choice" type="org.mule.tooling.ui.modules.core.pattern.cbr" entity-id="Choice#2"/>
+                <description></description>
+                <pattern name="Choice" type="org.mule.tooling.ui.modules.core.pattern.cbr" entity-id="Choice#2">
+                    <properties>
+                        <property name=";INDEX" value="17"/>
+                        <property-collection name="3e9b4d6d-2f6e-4b14-8c50-ffc13c826e85">
+                            <property name="choice.expression" value="#[opName == 'getWishList']"/>
+                            <property-collection name="choice.attributes">
+<property name="expression" value="#[opName == 'getWishList']"/>
+                            </property-collection>
+                        </property-collection>
+                        <property-collection name="1c57b5ac-1976-4988-8a20-7bc3d5fefbb9">
+                            <property name="choice.expression" value="#[opName == 'addWish']"/>
+                            <property-collection name="choice.attributes">
+<property name="expression" value="#[opName == 'addWish']"/>
+                            </property-collection>
+                        </property-collection>
+                        <property-collection name="999c34cc-aead-44cb-897d-52b7f2d2e013">
+                            <property name="choice.expression" value="#[opName == 'removeWish']"/>
+                            <property-collection name="choice.attributes">
+<property name="expression" value="#[opName == 'removeWish']"/>
+                            </property-collection>
+                        </property-collection>
+                        <property-collection name="93850c74-54db-445c-8739-693a5c5718f5">
+                            <property name="choice.otherwise" value="true"/>
+                            <property-collection name="choice.attributes"/>
+                        </property-collection>
+                    </properties>
+                    <description></description>
+                </pattern>
                 <compartment entity-id="compartment#1">
-                    <lane hadOnlyOneElement="false" index="19" isChoiceOtherwiseLane="false" entity-id="d257de4c-45e4-47d1-9e3f-cebd2acd7210">
+                    <lane hadOnlyOneElement="false" index="19" isChoiceOtherwiseLane="false" entity-id="3e9b4d6d-2f6e-4b14-8c50-ffc13c826e85">
                         <pattern name="imageMultiple" type="http://www.mulesoft.org/schema/mule/core/variable-transformer" entity-id="Variable#2">
                             <graphicalData x="0" y="0" width="0" height="0"/>
                             <properties>
@@ -229,22 +259,24 @@
                         <pattern name="select wish" type="http://www.mulesoft.org/schema/mule/db/database-connector" entity-id="Database#1">
                             <graphicalData x="0" y="0" width="0" height="0"/>
                             <properties>
-<property name="streaming"/>
-<property name=""/>
-<property name="fetchSize"/>
-<property name="source"/>
-<property name="transactionalAction"/>
-<property name="target" value="flowVars.wishList"/>
-<property name="maxRows"/>
+<property name="streaming" value="false"/>
+<property name="fetchSize" value=""/>
+<property name="auxiliary;erased;fetchSize" value="true"/>
+<property name="source" value=""/>
+<property name="updated"/>
+<property name="transactionalAction" value="JOIN_IF_POSSIBLE"/>
 <property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/db/select"/>
+<property name="target" value="flowVars.wishList"/>
+<property name="auxiliary;erased;maxRows" value="true"/>
+<property name="maxRows" value=""/>
 <property name="config-ref" value="MySQL_Configuration"/>
 <property name="auxiliary;index" value="21"/>
+<property name="auxiliary;metametadataStrategy" value="new-database-dynamic-statement-metadata-strategy"/>
 <property-collection name="@http://www.mulesoft.org/schema/mule/db/dynamic-query;0">
-    <property name="text" value="select si.sku_id, it.item_type_name, si.sku_name, si.sku_summary, i.item_brand, si.price, si.stock_quantity, im.url, imt.image_type_name &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;from customer c, wish w, item i, item_type it, sku_item si, image im, image_type imt &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;where c.id = w.customer_id &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;and w.active = true&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;and w.sku_item_id = si.sku_id &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;and i.item_type_id = it.id&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;and si.item_id = i.item_id&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;and si.sku_id = im.item_sku_id&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;and im.image_type_id = imt.id&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;and c.id = '#[xpath:/mes:getWishList/mod:CustomerId]' &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;and si.item_id = i.item_id&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;and imt.image_type_name in ('#[xpath('/mes:getWishList/mes:ImageType/text()').text.replaceAll(&quot;,&quot;, &quot;','&quot;)]')&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;limit #[Integer.valueOf(xpath('/mes:getWishList/mes:PageInfo/pageIndex/text()').text)],#[limit] "/>
-    <property name="auxiliary;index" value="22"/>
-    <property name="auxiliary;wrapIn" value="22"/>
+    <property name="text" value="select si.sku_id, it.item_type_name, si.sku_name, si.sku_summary, i.item_brand, si.price, si.stock_quantity, im.url, imt.image_type_name &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;from customer c, wish w, item i, item_type it, sku_item si, image im, image_type imt &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;where c.id = w.customer_id &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;and w.active = true&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;and w.sku_item_id = si.sku_id &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;and i.item_type_id = it.id&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;and si.item_id = i.item_id&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;and si.sku_id = im.item_sku_id&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;and im.image_type_id = imt.id&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;and c.id = '#[xpath:/mes:getWishList/mod:CustomerId]' &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;and si.item_id = i.item_id&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;and imt.image_type_name in ('#[xpath('/mes:getWishList/mes:ImageType/text()').text.replaceAll(&quot;,&quot;, &quot;','&quot;)]')&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;limit #[Integer.valueOf(xpath('/mes:getWishList/mes:PageInfo/pageIndex/text()').text)],#[limit]"/>
 </property-collection>
                             </properties>
+                            <description></description>
                         </pattern>
                         <pattern name="to []" type="http://www.mulesoft.org/schema/mule/core/expression-transformer" entity-id="Expression#1">
                             <graphicalData x="0" y="0" width="0" height="0"/>
@@ -275,7 +307,7 @@
                             </properties>
                         </pattern>
                     </lane>
-                    <lane hadOnlyOneElement="false" index="26" isChoiceOtherwiseLane="false" entity-id="c2482f0d-c2d3-48d1-994b-ae8b9385aa30">
+                    <lane hadOnlyOneElement="false" index="26" isChoiceOtherwiseLane="false" entity-id="1c57b5ac-1976-4988-8a20-7bc3d5fefbb9">
                         <pattern name="insert wish" type="http://www.mulesoft.org/schema/mule/db/database-connector" entity-id="Database#2">
                             <graphicalData x="0" y="0" width="0" height="0"/>
                             <properties>
@@ -305,7 +337,7 @@
                             </properties>
                         </pattern>
                     </lane>
-                    <lane hadOnlyOneElement="false" index="30" isChoiceOtherwiseLane="false" entity-id="4416dc3b-dc79-4e9b-9655-ae361d57cb67">
+                    <lane hadOnlyOneElement="false" index="30" isChoiceOtherwiseLane="false" entity-id="999c34cc-aead-44cb-897d-52b7f2d2e013">
                         <pattern name="update wish set !active" type="http://www.mulesoft.org/schema/mule/db/database-connector" entity-id="Database#3">
                             <graphicalData x="0" y="0" width="0" height="0"/>
                             <properties>
@@ -332,19 +364,19 @@
                             </properties>
                         </pattern>
                     </lane>
-                    <lane hadOnlyOneElement="false" index="34" isChoiceOtherwiseLane="true" entity-id="2669e1a5-1768-4cc7-b7c1-3acc55fab2ca">
+                    <lane hadOnlyOneElement="false" index="34" isChoiceOtherwiseLane="true" entity-id="93850c74-54db-445c-8739-693a5c5718f5">
                         <pattern name="Exception" type="http://www.mulesoft.org/schema/mule/scripting/groovyComponent" entity-id="Groovy#1">
                             <graphicalData x="0" y="0" width="0" height="0"/>
                             <properties>
 <property name="script-ref"/>
 <property name="auxiliary;index" value="34"/>
-<property-collection name="@http://www.mulesoft.org/schema/mule/scripting/script-for-properties;0">
+<property-collection name="@http://www.mulesoft.org/schema/mule/scripting/script;0">
     <property name="text" value="throw new RuntimeException(&quot;Unknown Operation: &quot; + flowVars.opName);"/>
     <property name="engine" value="Groovy"/>
     <property name="auxiliary;index" value="35"/>
     <property name="auxiliary;wrapIn" value="35"/>
 </property-collection>
-<property-collection name="@http://www.mulesoft.org/schema/mule/scripting/script;0">
+<property-collection name="@http://www.mulesoft.org/schema/mule/scripting/script-for-properties;0">
     <property name="text" value="throw new RuntimeException(&quot;Unknown Operation: &quot; + flowVars.opName);"/>
     <property name="engine" value="Groovy"/>
     <property name="auxiliary;index" value="35"/>
